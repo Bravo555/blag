@@ -16,6 +16,8 @@ import (
 	"github.com/russross/blackfriday"
 	"github.com/termie/go-shutil"
 	"gopkg.in/yaml.v2"
+
+	"go/build"
 )
 
 // Config is a struct that will be used to store Blag's config.
@@ -222,7 +224,7 @@ func main() {
 	var config Config
 	config.Input = flag.String("input", "input", "Directory where blog posts are stored (in markdown format)")
 	config.Output = flag.String("output", "output", "Directory where generated html should be stored (IT WILL REMOVE ALL FILES INSIDE THAT DIR)")
-	config.Theme = flag.String("theme", "theme", "Directory containing theme files (templates)")
+	config.Theme = flag.String("theme", path.Join(build.Default.GOPATH, "/src/github.com/irth/blag/theme"), "Directory containing theme files (templates)")
 	config.Title = flag.String("title", "Blag.", "Blag title")
 	config.DateFormat = flag.String("dateformat", "2006-01-02 15:04:05", "Time layout, as used in Golang's time.Time.Format()")
 	config.BaseURL = flag.String("baseurl", "/", "URL that will be used in <base href=\"\"> element.")
